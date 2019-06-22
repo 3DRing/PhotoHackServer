@@ -22,7 +22,7 @@ class ImageModifier {
     private fun getRectangle(image: BufferedImage): Rectangle = Rectangle(0, 0, image.width, image.height)
 
     private fun draw(graphics: Graphics2D, rectangle: Rectangle) {
-        val blackOpacityColor = Color(0, 0, 0, 90)
+        val blackOpacityColor = Color(20, 124, 0, 255)
         val bottomRectLine = 0.4
         val bottomRect = Rectangle(rectangle.x, (rectangle.height - (rectangle.height * bottomRectLine)).toInt(),
                 rectangle.width, (rectangle.height * bottomRectLine).toInt())
