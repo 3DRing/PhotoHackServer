@@ -21,7 +21,7 @@ class FileUploadController {
 
     companion object {
         private const val FILE_STORE_URL = "https://api.anonymousfiles.io/"
-        private const val OUTPUT_STORE_URL = "${FILE_STORE_URL}f/"
+        private const val OUTPUT_STORE_URL = "https://anonymousfiles.io/f/"
 
         private val TMP_FILE_DIR: String = System.getProperty("java.io.tmpdir")
     }
