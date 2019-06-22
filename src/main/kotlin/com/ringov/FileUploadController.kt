@@ -26,39 +26,55 @@ class FileUploadController {
         private val TMP_FILE_DIR: String = System.getProperty("java.io.tmpdir")
     }
 
-    private val imageFlexer = ImageModifier()
+    private val imageModifier = ImageModifier()
 
     @RequestMapping(value = "/upload", method = arrayOf(RequestMethod.POST),
             consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
     fun uploadFile(@RequestParam("file") file: MultipartFile): ResponseEntity<String> {
         Logger.log(file.originalFilename + " " + file.contentType + ", " + file.name)
 
-        val newFile = multipartToFile(file, generateName())
+        val extension = getExtension(file.originalFilename)
+        val fileName = generateName() + extension
+        val initialTmpFile = multipartToFile(file, fileName)
 
-        val flexedImage = imageFlexer.modify(newFile)
-        val flexedImageFile = flexedImage.toFile()
-        newFile.delete()
-        val response = buildFileRequest(flexedImageFile)
-        flexedImageFile.delete()
+        val modifiedImage = imageModifier.modify(initialTmpFile)
+        val modifiedImageFile = prepareTmpFile(generateName() + extension)
 
-        Logger.log("Tmp file removed: ${!newFile.exists()}")
+        modifiedImage.writeToFile(modifiedImageFile)
+        initialTmpFile.delete()
+
+        val response = buildFileRequest(modifiedImageFile)
+        modifiedImageFile.delete()
+
+        Logger.log("Initial tmp file removed: ${!initialTmpFile.exists()}")
+        Logger.log("Modified tmp file removed: ${!modifiedImageFile.exists()}")
 
         Logger.log(response.toString())
 
-        return ResponseEntity(buildResponse(newFile.name), HttpStatus.OK)
+        return ResponseEntity(buildResponse(modifiedImageFile.name), HttpStatus.OK)
     }
 
     @Throws(IllegalStateException::class, IOException::class)
     fun multipartToFile(multipart: MultipartFile, fileName: String): File {
-        val filename = cleanPath(multipart.originalFilename)
-        val dotIndex = filename.lastIndexOf(".")
-        val extension = filename.subSequence(dotIndex, filename.length)
-        val convertFile = File(TMP_FILE_DIR, fileName + extension)
+        val convertFile = prepareTmpFile(fileName)
         multipart.transferTo(convertFile)
 
         Logger.log("Tmp file created: ${convertFile.exists()}")
 
         return convertFile
+    }
+
+    private fun getExtension(fileName: String): String {
+        val filename = cleanPath(fileName)
+        val dotIndex = filename.lastIndexOf(".")
+        return filename.subSequence(dotIndex, filename.length).toString()
+    }
+
+    private fun prepareTmpFile(name: String): File {
+        val file = File(TMP_FILE_DIR, name)
+        val created = file.createNewFile()
+        Logger.log("File ${file.name} created: $created")
+        return file
     }
 
     private fun generateName(): String {
@@ -80,10 +96,5 @@ class FileUploadController {
 
     private fun buildResponse(fileName: String): String {
         return OUTPUT_STORE_URL + fileName
-    }
-
-    private fun ImageModifier.ModifiedImage.toFile(): File {
-        // TODO implement
-        return this.sourceFile
     }
 }
