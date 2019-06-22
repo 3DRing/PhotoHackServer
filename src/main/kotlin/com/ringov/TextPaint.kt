@@ -3,7 +3,6 @@ package com.ringov
 import java.awt.Font
 import java.awt.Graphics2D
 import java.awt.Rectangle
-import java.lang.Math.abs
 
 object TextPaint {
 
@@ -20,9 +19,10 @@ object TextPaint {
         var result = font
         var isTextFit = false
         val widthThreshold = rect.width / 10
-        while (!isTextFit && result.size > 1) {
+        var iterations = 0
+        while (!isTextFit && result.size > 1 && iterations < 256) {
             val textWidth = g.getFontMetrics(result).stringWidth(text)
-            isTextFit = abs(rect.width - textWidth) <= widthThreshold
+            isTextFit = (rect.width - textWidth) in 0..widthThreshold
             if (!isTextFit) {
                 val newSize = when {
                     textWidth > rect.width -> result.size - 1f
@@ -30,7 +30,7 @@ object TextPaint {
                 }
                 result = result.deriveFont(newSize)
             }
-
+            iterations++
         }
         return result
     }
