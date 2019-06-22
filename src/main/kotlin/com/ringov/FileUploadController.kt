@@ -26,19 +26,26 @@ class FileUploadController {
         private val TMP_FILE_DIR: String = System.getProperty("java.io.tmpdir")
     }
 
+    private val imageFlexer = ImageModifier()
+
     @RequestMapping(value = "/upload", method = arrayOf(RequestMethod.POST),
             consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    fun uploadFile(@RequestParam("file") file: MultipartFile): ResponseEntity<Object> {
+    fun uploadFile(@RequestParam("file") file: MultipartFile): ResponseEntity<String> {
         Logger.log(file.originalFilename + " " + file.contentType + ", " + file.name)
 
         val newFile = multipartToFile(file, generateName())
-        val response = buildFileRequest(newFile)
+
+        val flexedImage = imageFlexer.modify(newFile)
+        val flexedImageFile = flexedImage.toFile()
         newFile.delete()
+        val response = buildFileRequest(flexedImageFile)
+        flexedImageFile.delete()
+
         Logger.log("Tmp file removed: ${!newFile.exists()}")
 
         Logger.log(response.toString())
 
-        return ResponseEntity(buildResponse(newFile.name) as Object, HttpStatus.OK)
+        return ResponseEntity(buildResponse(newFile.name), HttpStatus.OK)
     }
 
     @Throws(IllegalStateException::class, IOException::class)
@@ -73,5 +80,10 @@ class FileUploadController {
 
     private fun buildResponse(fileName: String): String {
         return OUTPUT_STORE_URL + fileName
+    }
+
+    private fun ImageModifier.ModifiedImage.toFile(): File {
+        // TODO implement
+        return this.sourceFile
     }
 }
