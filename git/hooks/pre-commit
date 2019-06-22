@@ -1,0 +1,6 @@
+#!/bin/bash
+# copy this file to /PROJECT_DIR/.git/hooks
+echo "Pre-commit hook start"
+sh git/hooks/increment_build_number.sh
+git add build_number.txt
+echo "Pre-commit hook finished"
