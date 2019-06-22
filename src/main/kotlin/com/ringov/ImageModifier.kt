@@ -27,7 +27,7 @@ class ImageModifier {
         val bottomRect = Rectangle(rectangle.x, (rectangle.height - (rectangle.height * bottomRectLine)).toInt(),
                 rectangle.width, (rectangle.height * bottomRectLine).toInt())
         graphics.fillColoredRect(blackOpacityColor, bottomRect)
-        TextPaint.drawTextInRectangle(graphics, "SUCH PHOTO EFFECT", bottomRect)
+        TextPaint.drawTextInRectangle(graphics, TextGenerator.random(), bottomRect)
     }
 
     private fun getGraphic(image: BufferedImage): Graphics2D = image.createGraphics()

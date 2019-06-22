@@ -28,8 +28,8 @@ class FileUploadController {
 
     private val imageModifier = ImageModifier()
 
-    @RequestMapping(value = "/upload", method = arrayOf(RequestMethod.POST),
-            consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    @RequestMapping(value = ["/upload"], method = [RequestMethod.POST],
+            consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun uploadFile(@RequestParam("file") file: MultipartFile): ResponseEntity<String> {
         Logger.log(file.originalFilename + " " + file.contentType + ", " + file.name)
 
