@@ -23,14 +23,17 @@ class ImageModifier {
 
     private fun draw(graphics: Graphics2D, rectangle: Rectangle) {
         val blackOpacityColor = Color(0, 0, 0, 90)
-        drawForegroundGradient(graphics, rectangle, blackOpacityColor)
-
-    }
-
-    private fun drawForegroundGradient(graphics: Graphics2D, rectangle: Rectangle, color: Color) {
         val bottomRectLine = 0.4
         val bottomRect = Rectangle(rectangle.x, (rectangle.height - (rectangle.height * bottomRectLine)).toInt(),
                 rectangle.width, (rectangle.height * bottomRectLine).toInt())
+
+        drawForegroundGradient(graphics, rectangle, bottomRect, blackOpacityColor)
+        TextPaint.drawTextInRectangle(graphics, "SUCH PHOTO EFFECT", bottomRect)
+    }
+
+    private fun drawForegroundGradient(graphics: Graphics2D, rectangle: Rectangle,
+                                       bottomRect: Rectangle, color: Color) {
+
         val gradientRect = Rectangle(bottomRect.x, bottomRect.y, bottomRect.x, rectangle.height)
         graphics.fillGradientRect(buildLinearGradient(gradientRect, color), bottomRect)
     }
