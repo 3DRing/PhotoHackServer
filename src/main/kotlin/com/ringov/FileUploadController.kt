@@ -72,6 +72,6 @@ class FileUploadController {
     }
 
     private fun buildResponse(fileName: String): String {
-        return "{'url': '${OUTPUT_STORE_URL + fileName}'}"
+        return OUTPUT_STORE_URL + fileName
     }
 }
