@@ -4,12 +4,6 @@ import java.awt.Rectangle
 import java.util.*
 import java.util.regex.Pattern
 
-val Rectangle.xRight: Int
-    get() = x + width
-val Rectangle.yBottom: Int
-    get() = y + height
-
-
 fun <T> List<T>.random(): T {
     val index = Random().nextInt(size)
     return get(index)

@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils.cleanPath
 import org.springframework.web.client.RestTemplate
 import java.io.IOException
 
-
 @RestController
 class FileUploadController {
 
