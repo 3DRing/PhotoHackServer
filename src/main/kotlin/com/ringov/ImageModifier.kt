@@ -1,5 +1,6 @@
 package com.ringov
 
+import com.ringov.generator.Generator
 import java.awt.Color
 import java.awt.GradientPaint
 import java.awt.Graphics2D
@@ -34,7 +35,7 @@ class ImageModifier {
                 rectangle.width, (rectangle.height * bottomRectLine).toInt())
 
         drawForegroundGradient(graphics, rectangle, bottomRect, blackOpacityColor)
-        TextPaint.drawTextInRectangle(graphics, TextGenerator.random(), bottomRect)
+        TextPaint.drawTextInRectangle(graphics, Generator.generate(), bottomRect)
     }
 
     private fun drawForegroundGradient(graphics: Graphics2D, rectangle: Rectangle,
