@@ -8,12 +8,15 @@ class Generator {
             "Java",
             "JS",
             "python",
-            "с++"
+            "с++",
+            "kotlin",
+            "swift"
         ))
 
         private val engTerm = Element(listOf(
             "code-review",
-            "scrum"
+            "scrum",
+            "agile"
         ))
 
         private val whatKindOf = Element(listOf(
@@ -29,14 +32,16 @@ class Generator {
             "[kind] разработчик",
             "[kind] тестировщик",
             "[kind] девопс",
-            "[kind] девелопер"
+            "[kind] девелопер",
+            "[kind] менеджер",
+            "[kind] дизайнер"
         )).addSub("kind", whatKindOf)
 
         private val theirSomething = Element(listOf(
             "свой scram",
             "свои пулреквесты",
             "свой пулреквест",
-            "свой коммит мессадж"
+            "свой коммит месседж"
         ))
 
         private val does = Element(listOf(
@@ -68,7 +73,8 @@ class Generator {
             "шок",
             "вы не поверите",
             "ты не поверишь",
-            "в такое сложно поверить"
+            "в такое сложно поверить",
+            "невероятно, но"
         ), true)
 
         private val shockSentence = Element("[shock][mark]")
@@ -79,7 +85,9 @@ class Generator {
             "нужно всего лишь",
             "нужно только",
             "нужно просто",
-            "нужно взять за привычку"
+            "нужно взять за привычку",
+            "надо перед сном",
+            "нужно на ночь"
         ))
 
         private val needToWhat = Element(listOf(
@@ -90,14 +98,20 @@ class Generator {
             "засунуть флешку в...",
             "переносить задачу в...",
             "скомпилировать перед сном этот...",
-            "в обалаке ЭТО...",
+            "в облаке ЭТО...",
             "обучить свою нейронку на...",
             "носить...",
-            "поставить свой ноутбук на..."
+            "поставить свой ноутбук на...",
+            "перестать писать на [lang]",
+            "перестать практиковать [eng_term]",
+            "прочитать на ночь манул по [lang]",
+            "каждое утро делать [eng_term]"
         ))
+            .addSub("lang", lang)
+            .addSub("eng_term", engTerm)
 
         private val company = Element(listOf(
-            "google", "yandex", "mail.ru", "facebook"
+            "google", "yandex", "mail.ru", "facebook", "avito", "telegram"
         ))
 
         private val setup = Element(listOf(
@@ -117,7 +131,8 @@ class Generator {
             "разбогатеть легко!",
             "масштабируй свой СЕРВЕР без регистрации и смс",
             "твоим коллегам уже доступен бесплатный MacBook Pro",
-            "чтобы написать искусственный интеллект на [lang]"
+            "чтобы написать искусственный интеллект на [lang]",
+            "живот уйдет сам по себе!"
         ))
             .addSub("company", company)
             .addSub("eng_term", engTerm)
