@@ -53,7 +53,7 @@ class ImageModifier {
     private fun drawForegroundGradient(graphics: Graphics2D, rectangle: Rectangle,
                                        bottomRect: Rectangle, color: Color) {
 
-        val gradientRect = Rectangle(bottomRect.x, bottomRect.y, bottomRect.x, rectangle.height)
+        val gradientRect = Rectangle(bottomRect.x, bottomRect.y + 1, bottomRect.x, rectangle.height + 1)
         graphics.fillGradientRect(buildLinearGradient(gradientRect, color), bottomRect)
     }
 
