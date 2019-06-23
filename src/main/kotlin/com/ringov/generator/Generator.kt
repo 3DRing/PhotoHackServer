@@ -1,9 +1,6 @@
 package com.ringov.generator
 
 class Generator {
-    val elements = listOf<String>(
-            "вы будете в шоке, когда увидите что"
-    )
 
     val who = Element(listOf(
             "разработчик",
@@ -29,19 +26,59 @@ class Generator {
     val doesTheirWhat = Element(listOf(
             "[does] [what]"
     ))
+            .addSub("does", does)
+            .addSub("what", theirSomething)
 
     // кто-то делает что-то
     val someoneDoes = Element(listOf(
             "[who] [does]"
     ))
+            .addSub("who", who)
+            .addSub("does", doesTheirWhat)
 
-    init {
-        doesTheirWhat.addSub("does", does)
-        doesTheirWhat.addSub("what", theirSomething)
 
-        someoneDoes.addSub("who", who)
-        someoneDoes.addSub("does", doesTheirWhat)
-    }
+    val exclamationOrNot = Element(listOf("!", "."))
 
-    fun generate() = someoneDoes.generate()
+    val shock = Element(listOf(
+            "шок",
+            "вы не поверите",
+            "ты не поверишь",
+            "в такое сложно поверить"
+    ), true)
+    val shockSentance = Element("[shock][mark]")
+            .addSub("shock", shock)
+            .addSub("mark", exclamationOrNot)
+
+    val justNeedTo = Element(listOf(
+            "нужно всего лишь",
+            "нужно только"
+    ))
+
+    val needToWhat = Element(listOf(
+            "знать",
+            "использовать"
+    ))
+
+    val needToWhatExtra = Element(listOf(
+            "",
+            "это",
+            "этот способ",
+            ""
+    ), true)
+
+    val bait = Element(listOf(
+            "для этого [just_need] [what] [extra]"
+    ))
+            .addSub("just_need", justNeedTo)
+            .addSub("what", needToWhat)
+            .addSub("extra", needToWhatExtra)
+
+    val shockWhatHow = Element(listOf(
+            "[shock] [what], [how]"
+    ))
+            .addSub("shock", shockSentance)
+            .addSub("what", someoneDoes)
+            .addSub("how", bait)
+
+    fun generate() = shockWhatHow.generate()
 }
