@@ -10,7 +10,6 @@ import java.io.File
 import java.util.*
 import javax.imageio.ImageIO
 
-
 class ImageModifier {
     companion object {
         private val random = Random()
@@ -27,13 +26,6 @@ class ImageModifier {
 
     private fun cropImage(src: BufferedImage): BufferedImage {
         val size = Math.min(src.width, src.height)
-
-        val offsetXLimit = src.width - size
-        val offsetYLimit = src.height - size
-
-        val offsetX = if (offsetXLimit > 0) random.nextInt(offsetXLimit) else 0
-        val offsetY = if (offsetYLimit > 0) random.nextInt(offsetYLimit) else 0
-
         return src.getSubimage(0, 0, size - 1, size - 1)
     }
 
@@ -47,7 +39,7 @@ class ImageModifier {
                 rectangle.width, (rectangle.height * bottomRectLine).toInt())
 
         drawForegroundGradient(graphics, rectangle, bottomRect, blackOpacityColor)
-        TextPaint.drawTextInRectangle(graphics, Generator.generate(), bottomRect)
+        TextPaint.drawTextInRectangle(graphics, Generator.generate().capitilizeSentences(), bottomRect)
     }
 
     private fun drawForegroundGradient(graphics: Graphics2D, rectangle: Rectangle,

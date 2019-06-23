@@ -1,6 +1,5 @@
 package com.ringov
 
-import java.awt.Rectangle
 import java.util.*
 import java.util.regex.Pattern
 
@@ -10,6 +9,7 @@ fun <T> List<T>.random(): T {
 }
 
 val endMarkPattern = Pattern.compile("[\\!\\.\\?] .")
+
 fun String.capitilizeSentences(): String {
     val matches = Utils.matchesList(this, endMarkPattern)
     var result = this

@@ -35,19 +35,22 @@ class Generator {
             "[kind] девелопер",
             "[kind] менеджер",
             "[kind] дизайнер"
-        )).addSub("kind", whatKindOf)
+        ))
+            .addSub("kind", whatKindOf)
 
         private val theirSomething = Element(listOf(
             "свой scram",
             "свои пулреквесты",
             "свой пулреквест",
-            "свой коммит месседж"
+            "свой коммит месседж",
+            "свои таски"
         ))
 
         private val does = Element(listOf(
             "развивает",
             "улучшает",
-            "запускает"
+            "запускает",
+            "крутит"
         ))
 
         private val doesTheirWhat = Element(listOf(
@@ -74,7 +77,8 @@ class Generator {
             "вы не поверите",
             "ты не поверишь",
             "в такое сложно поверить",
-            "невероятно, но"
+            "невероятно, но",
+            "внимание"
         ), true)
 
         private val shockSentence = Element("[shock][mark]")
@@ -132,7 +136,8 @@ class Generator {
             "масштабируй свой СЕРВЕР без регистрации и смс",
             "твоим коллегам уже доступен бесплатный MacBook Pro",
             "чтобы написать искусственный интеллект на [lang]",
-            "живот уйдет сам по себе!"
+            "живот уйдет сам по себе!",
+            "можно узнать будущее уже сейчас"
         ))
             .addSub("company", company)
             .addSub("eng_term", engTerm)
@@ -141,7 +146,8 @@ class Generator {
         private val bait = Element(listOf(
             "для этого [just_need] [what]",
             "сделай ЭТО...",
-            "узнать КАК..."
+            "узнать КАК...",
+            "это не для слабонервных..."
         ))
             .addSub("just_need", justNeedTo)
             .addSub("what", needToWhat)
