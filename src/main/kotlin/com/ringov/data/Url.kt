@@ -9,5 +9,6 @@ import javax.persistence.Id
 data class Url(
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = 0,
-    var url: String = ""
+    var url: String = "",
+    var isPublic: Boolean = false
 )
