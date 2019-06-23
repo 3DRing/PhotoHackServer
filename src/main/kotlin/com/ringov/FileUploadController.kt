@@ -1,5 +1,7 @@
 package com.ringov
 
+import com.ringov.data.Url
+import com.ringov.data.UrlRepository
 import org.springframework.core.io.FileSystemResource
 import org.springframework.http.*
 import org.springframework.util.LinkedMultiValueMap
@@ -14,9 +16,10 @@ import java.util.*
 import org.springframework.util.StringUtils.cleanPath
 import org.springframework.web.client.RestTemplate
 import java.io.IOException
+import java.lang.Exception
 
 @RestController
-class FileUploadController {
+class FileUploadController(private val urlRepository: UrlRepository) {
 
     companion object {
         private const val FILE_STORE_URL = "https://api.anonymousfiles.io/"
@@ -49,8 +52,13 @@ class FileUploadController {
         Logger.log("Modified tmp file removed: ${!modifiedImageFile.exists()}")
 
         Logger.log(response.toString())
-
-        return ResponseEntity(buildResponse(modifiedImageFile.name), HttpStatus.OK)
+        val url = buildResponse(modifiedImageFile.name)
+        try {
+            urlRepository.save(Url(url = url))
+        } catch (e: Exception) {
+            println(e)
+        }
+        return ResponseEntity(url, HttpStatus.OK)
     }
 
     @Throws(IllegalStateException::class, IOException::class)
