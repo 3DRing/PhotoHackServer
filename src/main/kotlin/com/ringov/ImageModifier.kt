@@ -17,12 +17,24 @@ class ImageModifier {
     }
 
     fun modify(file: File): ModifiedImage {
-        val image = getImage(file)
+        val image = cropImage(getImage(file))
         val rectangle = getRectangle(image)
         val graphics = getGraphic(image)
         draw(graphics, rectangle)
         graphics.dispose()
         return ModifiedImage(image)
+    }
+
+    private fun cropImage(src: BufferedImage): BufferedImage {
+        val size = Math.min(src.width, src.height)
+
+        val offsetXLimit = src.width - size
+        val offsetYLimit = src.height - size
+
+        val offsetX = if (offsetXLimit > 0) random.nextInt(offsetXLimit) else 0
+        val offsetY = if (offsetYLimit > 0) random.nextInt(offsetYLimit) else 0
+
+        return src.getSubimage(offsetX, offsetY, size + offsetX - 1, size + offsetY - 1)
     }
 
     private fun getRectangle(image: BufferedImage): Rectangle = Rectangle(0, 0, image.width, image.height)
