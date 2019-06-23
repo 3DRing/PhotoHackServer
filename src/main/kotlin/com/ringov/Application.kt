@@ -1,13 +1,15 @@
 package com.ringov
 
-import org.springframework.boot.SpringApplication
+import com.ringov.generator.Generator
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
 open class Application {
     companion object {
-        @JvmStatic fun main(args: Array<String>) {
-            SpringApplication.run(Application::class.java, *args)
+        @JvmStatic
+        fun main(args: Array<String>) {
+            System.out.print(Generator.generate().capitilizeSentences())
+            //SpringApplication.run(Application::class.java, *args)
         }
     }
 }
