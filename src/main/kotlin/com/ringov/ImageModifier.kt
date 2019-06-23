@@ -34,7 +34,7 @@ class ImageModifier {
         val offsetX = if (offsetXLimit > 0) random.nextInt(offsetXLimit) else 0
         val offsetY = if (offsetYLimit > 0) random.nextInt(offsetYLimit) else 0
 
-        return src.getSubimage(offsetX, offsetY, size + offsetX - 1, size + offsetY - 1)
+        return src.getSubimage(0, 0, size - 1, size - 1)
     }
 
     private fun getRectangle(image: BufferedImage): Rectangle = Rectangle(0, 0, image.width, image.height)
