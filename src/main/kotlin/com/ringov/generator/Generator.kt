@@ -88,7 +88,7 @@ class Generator {
         ))
 
         private val company = Element(listOf(
-                "гугл", "яндекс", "google", "yandex", "mail.ru", "facebook"
+                "google", "yandex", "mail.ru", "facebook"
         ))
 
         private val setup = Element(listOf(
@@ -108,7 +108,8 @@ class Generator {
                 "развивать ум и логику легко",
                 "разбогатеть легко!",
                 "масштабируй свой СЕРВЕР без регистрации и смс",
-                "Твоим коллегам уже доступен бесплатный MacBook Pro"
+                "твоим коллегам уже доступен бесплатный MacBook Pro",
+                "чтобы написать искусственный интеллект на [lang]"
         ))
                 .addSub("company", company)
                 .addSub("eng_term", engTerm)
@@ -116,7 +117,7 @@ class Generator {
         private val lang = Element(listOf(
                 "Java",
                 "JS",
-                "питон",
+                "python",
                 "с++"
         ))
 
@@ -130,8 +131,7 @@ class Generator {
 
         private val templates = Element(listOf(
                 "[shock] [what], [how]",
-                "[shock] [setup], [how]",
-                "хватит писать на [lang], переходите на..."
+                "[shock] [setup], [how]"
         ))
                 .addSub("shock", shockSentence)
                 .addSub("what", someoneDoes)
