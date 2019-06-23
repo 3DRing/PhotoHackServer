@@ -4,12 +4,17 @@ import java.awt.Color
 import java.awt.GradientPaint
 import java.awt.Graphics2D
 import java.awt.Rectangle
-import java.io.File
-import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
+import java.io.File
+import java.util.*
+import javax.imageio.ImageIO
 
 
 class ImageModifier {
+    companion object {
+        private val random = Random()
+    }
+
     fun modify(file: File): ModifiedImage {
         val image = getImage(file)
         val rectangle = getRectangle(image)
@@ -22,7 +27,8 @@ class ImageModifier {
     private fun getRectangle(image: BufferedImage): Rectangle = Rectangle(0, 0, image.width, image.height)
 
     private fun draw(graphics: Graphics2D, rectangle: Rectangle) {
-        val blackOpacityColor = Color(20, 124, 0, 255)
+        val blackOpacityColor = Color(random.nextInt(60),
+                random.nextInt(60), random.nextInt(60), 255)
         val bottomRectLine = 0.4
         val bottomRect = Rectangle(rectangle.x, (rectangle.height - (rectangle.height * bottomRectLine)).toInt(),
                 rectangle.width, (rectangle.height * bottomRectLine).toInt())
