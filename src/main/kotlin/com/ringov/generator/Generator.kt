@@ -124,7 +124,7 @@ class Generator {
         private val bait = Element(listOf(
                 "для этого [just_need] [what]",
                 "сделайте ЭТО...",
-                "Узнать КАК..."
+                "узнать КАК..."
         ))
                 .addSub("just_need", justNeedTo)
                 .addSub("what", needToWhat)

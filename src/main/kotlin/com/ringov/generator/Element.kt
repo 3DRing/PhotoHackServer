@@ -1,23 +1,14 @@
 package com.ringov.generator
 
+import com.ringov.Utils
 import com.ringov.random
 import java.util.*
 import java.util.regex.Pattern
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 open class Element(private val patterns: List<String>, private val capsAllowed: Boolean = false) {
     companion object {
         private val WILD_CARD = Pattern.compile("\\[(.*?)]")
-
-        private fun matchesList(sourceString: String, wildcard: Pattern): List<String> {
-            val matcher = wildcard.matcher(sourceString)
-            val list = ArrayList<String>()
-            while (matcher.find()) {
-                list.add(matcher.group())
-            }
-            return list
-        }
 
         private val rand = Random()
     }
@@ -33,7 +24,7 @@ open class Element(private val patterns: List<String>, private val capsAllowed: 
                 result = result.toUpperCase()
             }
         }
-        val wildcards = matchesList(result, WILD_CARD)
+        val wildcards = Utils.matchesList(result, WILD_CARD)
         for (w in wildcards) {
             val list = subElement[w.trimBraces()]
             if (list != null) {
